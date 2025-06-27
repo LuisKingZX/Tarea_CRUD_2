@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 @Entity
 public class Role {
 
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+    public static final String ROLE_USER = "ROLE_USER";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -12,10 +15,8 @@ public class Role {
     @Column(nullable = false, unique = true)
     private String name;
 
-    // Constructor vacío
     public Role() {}
 
-    // Constructor con parámetros
     public Role(String name) {
         this.name = name;
     }
@@ -37,5 +38,6 @@ public class Role {
         this.name = name;
     }
 }
+
 
 

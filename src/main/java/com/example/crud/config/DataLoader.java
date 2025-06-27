@@ -23,7 +23,7 @@ public class DataLoader {
                 admin.setPassword(passwordEncoder.encode("admin123"));
 
                 Role adminRole = new Role();
-                adminRole.setName(Role.SUPER-ADMIN-ROLE); // Constante que defines en Role
+                adminRole.setName(Role.ROLE_ADMIN); // Constante que defines en Role
 
                 admin.setRoles(Collections.singleton(adminRole));
                 userRepository.save(admin);
@@ -35,7 +35,7 @@ public class DataLoader {
                 user.setPassword(passwordEncoder.encode("user123"));
 
                 Role userRole = new Role();
-                userRole.setName(Role.USER_ROLE); // Constante que defines en Role
+                userRole.setName(Role.ROLE_USER); // Constante que defines en Role
 
                 user.setRoles(Collections.singleton(userRole));
                 userRepository.save(user);
