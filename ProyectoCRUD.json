@@ -1,0 +1,119 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-06-06T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "wrk_001",
+      "name": "Proyecto CRUD API",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_001",
+      "parentId": "wrk_001",
+      "_type": "environment",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8080",
+        "jwt": ""
+      }
+    },
+    {
+      "_id": "req_login_admin",
+      "parentId": "wrk_001",
+      "_type": "request",
+      "name": "Login Admin",
+      "method": "POST",
+      "url": "{{ base_url }}/auth/login",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+      }
+    },
+    {
+      "_id": "req_login_user",
+      "parentId": "wrk_001",
+      "_type": "request",
+      "name": "Login User",
+      "method": "POST",
+      "url": "{{ base_url }}/auth/login",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"user\",\n  \"password\": \"user123\"\n}"
+      }
+    },
+    {
+      "_id": "req_get_productos",
+      "parentId": "wrk_001",
+      "_type": "request",
+      "name": "GET Productos",
+      "method": "GET",
+      "url": "{{ base_url }}/productos",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ jwt }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_post_producto",
+      "parentId": "wrk_001",
+      "_type": "request",
+      "name": "POST Producto",
+      "method": "POST",
+      "url": "{{ base_url }}/productos",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ jwt }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"Pelota\",\n  \"descripcion\": \"Pelota de f\\u00fatbol profesional\",\n  \"precio\": 15000,\n  \"cantidadEnStock\": 20,\n  \"categoria\": {\n    \"id\": 1\n  }\n}"
+      }
+    },
+    {
+      "_id": "req_get_categorias",
+      "parentId": "wrk_001",
+      "_type": "request",
+      "name": "GET Categor\u00edas",
+      "method": "GET",
+      "url": "{{ base_url }}/categorias",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ jwt }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_post_categoria",
+      "parentId": "wrk_001",
+      "_type": "request",
+      "name": "POST Categor\u00eda",
+      "method": "POST",
+      "url": "{{ base_url }}/categorias",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ jwt }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nombre\": \"Deportes\",\n  \"descripcion\": \"Art\\u00edculos deportivos\"\n}"
+      }
+    }
+  ]
+}
