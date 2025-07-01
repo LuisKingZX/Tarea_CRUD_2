@@ -1,0 +1,74 @@
+<div class="row info-container">
+    <div class="col-6">
+        <div class="shadow-sm bg-body rounded px-4 py-4 h-100">
+            <div class="mb-3">
+                <i class="fa-solid fa-user-tie fa-2x"></i>
+            </div>
+
+            <div class="border-bottom pb-2 mb-3">
+                <label class="form-label fw-semibold">Name:</label>
+                <p class="mb-0">{{ profileService.user$().name }}</p>
+            </div>
+
+            <div class="border-bottom pb-2 mb-3">
+                <label class="form-label fw-semibold">Lastname:</label>
+                <p class="mb-0">{{ profileService.user$().lastname }}</p>
+            </div>
+
+            <div class="border-bottom pb-2 mb-3">
+                <label class="form-label fw-semibold">Email:</label>
+                <p class="mb-0">{{ profileService.user$().email }}</p>
+            </div>
+
+            <div>
+                <label class="form-label fw-semibold">Last update:</label>
+                <p class="mb-0">{{ profileService.user$().updatedAt | date: 'dd/MM/yyyy' }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="row">
+            <div class="col-12 shadow-sm bg-body rounded px-4 py-4 mb-3">
+                <label class="form-label fw-semibold">Role:</label>
+
+                <div class="border-bottom pb-2 mb-3">
+                    <label class="form-label fw-semibold">Name:</label>
+                    <p class="mb-0">{{ profileService.user$().role?.name }}</p>
+                </div>
+
+                <div class="border-bottom pb-2 mb-3">
+                    <label class="form-label fw-semibold">Description:</label>
+                    <p class="mb-0">{{ profileService.user$().role?.description }}</p>
+                </div>
+
+                <div>
+                    <label class="form-label fw-semibold">Last update:</label>
+                    <p class="mb-0">{{ profileService.user$().role?.updatedAt | date: 'dd/MM/yyyy' }}</p>
+                </div>
+            </div>
+
+            <div class="col-12 shadow-sm bg-body rounded px-4 py-4">
+                <label class="form-label fw-semibold">Last actions:</label>
+
+                <table class="table table-striped mb-0">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr *ngFor="let action of lastActions; let i = index">
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>{{ action.date | date: 'dd/MM/yyyy' }}</td>
+                        <td>{{ action.description }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

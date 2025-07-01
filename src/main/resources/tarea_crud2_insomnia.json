@@ -1,0 +1,296 @@
+{
+  "__export_format": 4,
+  "__export_date": "2025-07-01T02:38:09.000Z",
+  "__export_source": "chatgpt.generated:insomnia/8.0.0",
+  "resources": [
+    {
+      "_id": "wrk_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Tarea_CRUD_2 - API",
+      "description": "Colecci\u00f3n generada autom\u00e1ticamente para tu backend real",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_197c3d7df68",
+      "parentId": "wrk_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8080",
+        "token": ""
+      },
+      "_type": "environment"
+    },
+    {
+      "_id": "fld_197c3d7df68",
+      "parentId": "wrk_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Auth",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_197c3d7df69",
+      "parentId": "fld_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Login SUPER_ADMIN",
+      "method": "POST",
+      "url": "{{ _.base_url }}/auth/login",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"super.admin@gmail.com\",\n  \"password\": \"superadmin123\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "fld_197c3d7df68",
+      "parentId": "wrk_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Productos",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_197c3d7e355",
+      "parentId": "fld_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Get productos",
+      "method": "GET",
+      "url": "{{ _.base_url }}/productos",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_197c3d7e356",
+      "parentId": "fld_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Post productos",
+      "method": "POST",
+      "url": "{{ _.base_url }}/productos",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "_type": "request",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \n}"
+      }
+    },
+    {
+      "_id": "req_197c3d7e357",
+      "parentId": "fld_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Put productos",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/productos/1",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "_type": "request",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \n}"
+      }
+    },
+    {
+      "_id": "req_197c3d7e358",
+      "parentId": "fld_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Patch productos",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/productos/1",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "_type": "request",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \n}"
+      }
+    },
+    {
+      "_id": "req_197c3d7e359",
+      "parentId": "fld_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Delete productos",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/productos/1",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "fld_197c3d7df68",
+      "parentId": "wrk_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Categorias",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_197c3d7e35b",
+      "parentId": "fld_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Get categorias",
+      "method": "GET",
+      "url": "{{ _.base_url }}/categorias",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_197c3d7e35c",
+      "parentId": "fld_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Post categorias",
+      "method": "POST",
+      "url": "{{ _.base_url }}/categorias",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "_type": "request",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \n}"
+      }
+    },
+    {
+      "_id": "req_197c3d7e35d",
+      "parentId": "fld_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Put categorias",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/categorias/1",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "_type": "request",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \n}"
+      }
+    },
+    {
+      "_id": "req_197c3d7e35e",
+      "parentId": "fld_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Patch categorias",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/categorias/1",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "_type": "request",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \n}"
+      }
+    },
+    {
+      "_id": "req_197c3d7e35f",
+      "parentId": "fld_197c3d7df68",
+      "created": 1751337394024,
+      "modified": 1751337394024,
+      "name": "Delete categorias",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/categorias/1",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ],
+      "_type": "request"
+    }
+  ]
+}

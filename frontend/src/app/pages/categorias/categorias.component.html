@@ -1,0 +1,23 @@
+<ng-container *ngIf="areActionsAvailable">
+    <app-categoria-form
+            [form]="categoriaForm"
+            (callSaveMethod)="saveCategoria($event)">
+    </app-categoria-form>
+</ng-container>
+
+<app-categoria-list
+        [categoriaList]="categoriaService.categorias$()"
+        (callUpdateModalMethod)="openEditCategoriaModal($event)"
+        (callDeleteMethod)="deleteCategoria($event)">
+</app-categoria-list>
+
+<app-pagination [service]="categoriaService"></app-pagination>
+
+<ng-template #editCategoriaModal>
+    <app-modal [hideFooter]="true">
+        <app-categoria-form
+                [form]="categoriaForm"
+                (callUpdateMethod)="updateCategoria($event)">
+        </app-categoria-form>
+    </app-modal>
+</ng-template>
