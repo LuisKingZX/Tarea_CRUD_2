@@ -1,10 +1,11 @@
 .modal-header {
   display: flex;
-  justify-content: end;
-  border-bottom: none;
-  padding-bottom: 0px;
+  justify-content: flex-end;
+  border-bottom: 0;
+  padding-bottom: 0;
+
   .close {
-    background: none;
+    background: transparent;
     border: none;
   }
 }

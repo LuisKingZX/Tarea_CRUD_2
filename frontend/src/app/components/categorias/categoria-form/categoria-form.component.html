@@ -1,23 +1,33 @@
-<div>
-  <form [formGroup]="form" class="categoria-form">
-  <h2 class="form-title">Agregar una categoría</h2>
+<div class="categoria-form-wrapper">
+    <form [formGroup]="form" class="categoria-form">
 
-  <div class="form-group">
-    <label for="nombre">Nombre de Categoría: *</label>
-    <input id="nombre" formControlName="nombre" type="text" class="form-control" />
-    @if (form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)) {
-      <p class="error-msg">El campo "nombre" es requerido</p>
-    }
-  </div>
+        <fieldset>
+            <legend> Registro de nueva categoría</legend>
 
-  <div class="form-group">
-    <label for="descripcion">Descripción de la Categoría: *</label>
-    <input id="descripcion" formControlName="descripcion" type="text" class="form-control" />
-    @if (form.controls['descripcion'].invalid && (form.controls['descripcion'].dirty || form.controls['descripcion'].touched)) {
-      <p class="error-msg">El campo "descripcion" es requerido</p>
-    }
-  </div>
+            <small class="form-note">Los campos marcados con * son obligatorios.</small>
 
-  <button (click)="callSave()" [disabled]="form.invalid" class="btn btn-primary" type="button">Guardar</button>
-  </form>
+            <div class="input-block">
+                <label for="nombre">Nombre *</label>
+                <input id="nombre" formControlName="nombre" type="text" class="form-control" />
+                @if (form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)) {
+                    <span class="validation-error">El campo nombre es requerido</span>
+                }
+            </div>
+
+            <div class="input-block">
+                <label for="descripcion">Descripción *</label>
+                <input id="descripcion" formControlName="descripcion" type="text" class="form-control" />
+                @if (form.controls['descripcion'].invalid && (form.controls['descripcion'].dirty || form.controls['descripcion'].touched)) {
+                    <span class="validation-error">El campo descripción es requerido</span>
+                }
+            </div>
+
+            <div class="actions">
+                <button (click)="callSave()" [disabled]="form.invalid" type="button" class="btn btn-success">
+                    Guardar Categoría
+                </button>
+            </div>
+        </fieldset>
+
+    </form>
 </div>

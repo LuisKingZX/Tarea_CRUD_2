@@ -4,88 +4,82 @@ import { AlertService } from './alert.service';
 import { BaseService } from './base-service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductoService extends BaseService<IProduct> {
-  protected override source: string = 'productos';
-  private productoListSignal = signal<IProduct[]>([]);
+  protected override source = 'productos';
+
+  private _productosSignal = signal<IProduct[]>([]);
   get productos$() {
-    return this.productoListSignal;
-  } 
+    return this._productosSignal;
+  }
 
-  public search: ISearch = { 
+  public searchParams: ISearch = {
     page: 1,
-    size: 3
-  }
+    size: 3,
+  };
 
-  public totalItems: any = [];
-  private alertService: AlertService = inject(AlertService);
+  public totalPagesArray: number[] = [];
 
-  getAll() {
-    this.findAllWithParams({ page: this.search.page, size: this.search.size})
-    .subscribe({
-      next: (response: IResponse<IProduct[]>) => {
-        this.search = { ...this.search, ...response.meta };
-        this.totalItems = Array.from({ length: this.search.totalPages ? this.search.totalPages : 0 }, (_, i) => i + 1);
-        this.productoListSignal.set(response.data);
+  private alertSvc = inject(AlertService);
+
+  obtenerTodos() {
+    this.findAllWithParams({ page: this.searchParams.page, size: this.searchParams.size }).subscribe({
+      next: (res: IResponse<IProduct[]>) => {
+        this.searchParams = { ...this.searchParams, ...res.meta };
+        const totalPages = this.searchParams.totalPages ?? 0;
+        this.totalPagesArray = Array.from({ length: totalPages }, (_, i) => i + 1);
+        this._productosSignal.set(res.data);
       },
-      error: (err: any) => {
-        console.error('error', err);
-      }
+      error: (err) => {
+        console.error('Error fetching products:', err);
+      },
     });
   }
 
-save(item: IProduct) {
-  this.add(item).subscribe({
-    next: (response: IResponse<IProduct>) => {
-      this.alertService.displayAlert(
-        'success',
-        response.message,
-        'center',
-        'top',
-        ['success-snackbar']
-      );
-      this.getAll();
-    },
-    error: (err: any) => {
-      if (
-        err.status === 400 &&(err.error?.message?.includes("categoría") || err.error?.message?.includes("Categoria"))) {
-        this.alertService.displayAlert(
-          'error', 'La categoría ingresada no existe en la base de datos.', 'center', 'top', ['error-snackbar']
-        );
-      } else {
-        this.alertService.displayAlert(
-          'error', 'Ocurrió un error al guardar el producto.', 'center', 'top', ['error-snackbar']
-        );
-      }
-    }
-  });
-}
-
-  
-    update(item: IProduct) {
-    this.edit(item.id, item).subscribe({
-      next: (response: IResponse<IProduct>) => {
-        this.alertService.displayAlert('success', response.message, 'center', 'top', ['success-snackbar']);
-        this.getAll();
+  guardar(producto: IProduct) {
+    this.add(producto).subscribe({
+      next: (res: IResponse<IProduct>) => {
+        this.alertSvc.displayAlert('success', res.message, 'center', 'top', ['success-snackbar']);
+        this.obtenerTodos();
       },
-      error: (err: any) => {
-        this.alertService.displayAlert('error', 'An error occurred adding the team', 'center', 'top', ['error-snackbar']);
-        console.error('error', err);
-      }
+      error: (err) => {
+        if (
+            err.status === 400 &&
+            (err.error?.message?.toLowerCase().includes('categoría') || err.error?.message?.toLowerCase().includes('categoria'))
+        ) {
+          this.alertSvc.displayAlert('error', 'La categoría ingresada no existe en la base de datos.', 'center', 'top', ['error-snackbar']);
+        } else {
+          this.alertSvc.displayAlert('error', 'Ocurrió un error al guardar el producto.', 'center', 'top', ['error-snackbar']);
+        }
+      },
     });
   }
 
-    delete(item: IProduct) {
-    this.del(item.id).subscribe({
-      next: (response: IResponse<IProduct>) => {
-        this.alertService.displayAlert('success', response.message, 'center', 'top', ['success-snackbar']);
-        this.getAll();
+  actualizar(producto: IProduct) {
+    this.edit(producto.id, producto).subscribe({
+      next: (res: IResponse<IProduct>) => {
+        this.alertSvc.displayAlert('success', res.message, 'center', 'top', ['success-snackbar']);
+        this.obtenerTodos();
       },
-      error: (err: any) => {
-        this.alertService.displayAlert('error', 'An error occurred adding the team', 'center', 'top', ['error-snackbar']);
-        console.error('error', err);
-      }
+      error: (err) => {
+        this.alertSvc.displayAlert('error', 'Ocurrió un error al actualizar el producto.', 'center', 'top', ['error-snackbar']);
+        console.error('Error updating product:', err);
+      },
+    });
+  }
+
+  eliminar(producto: IProduct) {
+    this.del(producto.id).subscribe({
+      next: (res: IResponse<IProduct>) => {
+        this.alertSvc.displayAlert('success', res.message, 'center', 'top', ['success-snackbar']);
+        this.obtenerTodos();
+      },
+      error: (err) => {
+        this.alertSvc.displayAlert('error', 'Ocurrió un error al eliminar el producto.', 'center', 'top', ['error-snackbar']);
+        console.error('Error deleting product:', err);
+      },
     });
   }
 }
+
